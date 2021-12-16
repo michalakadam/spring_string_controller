@@ -1,5 +1,6 @@
-dev/michalak/adam/springstring/dto/StringRequest$Builder.class
 dev/michalak/adam/springstring/dto/StringResponse.class
-dev/michalak/adam/springstring/SpringStringApplication.class
 dev/michalak/adam/springstring/controller/StringController.class
+dev/michalak/adam/springstring/dto/StringRequest$Builder.class
+dev/michalak/adam/springstring/SpringStringApplication.class
+dev/michalak/adam/springstring/dto/StringResponse$StringResponseBuilder.class
 dev/michalak/adam/springstring/dto/StringRequest.class

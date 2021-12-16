@@ -62,6 +62,7 @@ public class StringRequest implements Serializable {
 
         public Builder() {}
 
+        @JsonProperty("data")
         public Builder listsOfStrings(List<List<String>> listsOfStrings) {
             this.listsOfStrings = listsOfStrings;
             return this;
