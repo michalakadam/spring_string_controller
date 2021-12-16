@@ -10,6 +10,10 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+  * Jackson + verbose Builder pattern for practice purposes.
+  * Lombok is used in {@link StringResponse} in case you are wondering.
+  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonDeserialize(builder = StringRequest.Builder.class)
 public class StringRequest implements Serializable {
