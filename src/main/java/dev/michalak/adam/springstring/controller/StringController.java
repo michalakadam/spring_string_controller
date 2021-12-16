@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotNull;
+
 @Slf4j
 @RestController
 public class StringController {
@@ -20,15 +22,15 @@ public class StringController {
 
     @PostMapping("concatenate")
     public StringResponse concatenate(@RequestBody StringRequest request) {
-        log.info("Incoming" + request.toString());
+        log.info("Incoming {}", request.toString());
 
         return this.stringHandler.concatenate(request);
     }
 
-    @PostMapping("reverse")
-    public StringResponse reverse(@RequestBody StringRequest request) {
-        log.info("Incoming {}", request.toString());
+    @PostMapping("palindrome")
+    public boolean reverse(@NotNull String text) {
+        log.info("Incoming word {}", text);
 
-        return null;
+        return this.stringHandler.isPalindrome(text);
     }
 }
