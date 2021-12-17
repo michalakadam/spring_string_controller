@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>dev.michalak.adam</groupId>
 	<artifactId>spring_string_controller</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>spring_string_controller</name>
 	<description>Spring web controller that manipulates strings</description>
 	<properties>

@@ -28,6 +28,10 @@ public class StringRequest implements Serializable {
         this.listsOfStrings = listsOfStrings;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static Builder toBuilder(StringRequest copy) {
         Builder builder = new Builder();
         builder.listsOfStrings = copy.getListsOfStrings();
