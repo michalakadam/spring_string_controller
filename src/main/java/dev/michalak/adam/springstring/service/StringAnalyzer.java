@@ -29,7 +29,7 @@ public class StringAnalyzer {
         return listOfStrings.stream().anyMatch(this::isPalindrome);
     }
 
-    public boolean isPalindrome(String text){
+    private boolean isPalindrome(String text){
         String reversed = new StringBuilder(text).reverse().toString();
 
         return text.equals(reversed);
