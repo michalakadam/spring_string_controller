@@ -2,34 +2,34 @@ package dev.michalak.adam.springstring.service;
 
 import dev.michalak.adam.springstring.dto.StringRequest;
 import dev.michalak.adam.springstring.dto.StringResponse;
+import dev.michalak.adam.springstring.repository.StringRepository;
+import dev.michalak.adam.springstring.repository.entity.StringData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
-class StringAnalyzerTest {
+@ExtendWith(MockitoExtension.class)
+class StringServiceTest {
+    @Mock
     private StringAnalyzer stringAnalyzer;
+    @Mock
+    private StringRepository stringRepository;
+    private StringService stringService;
 
     @BeforeEach
     void setUp() {
-        stringAnalyzer = new StringAnalyzer();
+        this.stringService = new StringService(stringAnalyzer, stringRepository);
     }
 
     @Test
-    void analyze_emptyListOfLists_returnsDefaultResponse() {
-        // listsOfStrings is never null - 500 error is thrown at the controller level.
-        var request = StringRequest.builder().listsOfStrings(List.of()).build();
-        var expected = StringResponse.builder().build();
-
-        var actual = stringAnalyzer.analyze(request);
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void analyze_requestWithValidData_returnsProperlyPopulatedResponse() {
+    void process_shouldCallDependenciesAndReturnValidResult() {
         var request = StringRequest.builder()
                 .listsOfStrings(List.of(
                         List.of("abb", "aa", "zz"),
@@ -42,8 +42,12 @@ class StringAnalyzerTest {
                 .concatenatedResult("abbaazzzzaabba")
                 .build();
 
-        var actual = stringAnalyzer.analyze(request);
+        when(stringAnalyzer.analyze(request)).thenReturn(expected);
+        var actual = stringService.process(request);
 
         assertEquals(expected, actual);
+        verify(stringAnalyzer, times(1)).analyze(request);
+        verify(stringRepository, times(1))
+                .save(new StringData(expected.getConcatenatedResult()));
     }
 }

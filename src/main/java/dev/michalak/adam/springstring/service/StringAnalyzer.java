@@ -2,6 +2,7 @@ package dev.michalak.adam.springstring.service;
 
 import dev.michalak.adam.springstring.dto.StringRequest;
 import dev.michalak.adam.springstring.dto.StringResponse;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.math.RoundingMode;
@@ -9,24 +10,23 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
-public class StringAnalyzer {
+@Component
+class StringAnalyzer {
 
-    public StringResponse analyze(StringRequest request) {
-        var listOfStrings = request.getListsOfStrings()
-                .stream()
-                .flatMap(List::stream)
-                .collect(Collectors.toList());
+    StringResponse analyze(StringRequest request) {
+        var listsOfStrings = request.getListsOfStrings();
 
         return StringResponse.builder()
-                .palindromePresent(isPalindromePresent(listOfStrings))
-                .averageLength(calculateAverageLength(listOfStrings))
-                .concatenatedResult(concatenate(listOfStrings))
+                .concatenatedResult(concatenate(listsOfStrings))
+                .palindromePresent(isPalindromePresent(listsOfStrings))
+                .averageLength(calculateAverageLength(listsOfStrings))
                 .build();
     }
 
-    private boolean isPalindromePresent(List<String> listOfStrings) {
-        return listOfStrings.stream().anyMatch(this::isPalindrome);
+    private boolean isPalindromePresent(List<List<String>> listsOfStrings) {
+        return listsOfStrings.stream()
+                .flatMap(List::stream)
+                .anyMatch(this::isPalindrome);
     }
 
     private boolean isPalindrome(String text){
@@ -35,8 +35,9 @@ public class StringAnalyzer {
         return text.equals(reversed);
     }
 
-    private double calculateAverageLength(List<String> listOfStrings) {
-        double rawAverage = listOfStrings.stream()
+    private double calculateAverageLength(List<List<String>> listsOfStrings) {
+        double rawAverage = listsOfStrings.stream()
+                .flatMap(List::stream)
                 .mapToInt(String::length)
                 .average()
                 .orElse(0);
@@ -51,8 +52,9 @@ public class StringAnalyzer {
         return Double.parseDouble(decimalFormat.format(rawValue));
     }
 
-    private String concatenate(List<String> listOfStrings) {
-        return  listOfStrings.stream()
+    private String concatenate(List<List<String>> listsOfStrings) {
+        return  listsOfStrings.stream()
+                .flatMap(List::stream)
                 .map(String::trim)
                 .collect(Collectors.joining());
     }
