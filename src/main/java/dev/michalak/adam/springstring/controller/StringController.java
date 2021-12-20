@@ -5,6 +5,7 @@ import dev.michalak.adam.springstring.dto.StringResponse;
 import dev.michalak.adam.springstring.service.StringService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,9 +22,9 @@ public class StringController {
     }
 
     @PostMapping("analyze")
-    public StringResponse analyzeStringRequest(@RequestBody StringRequest request) {
+    public ResponseEntity<StringResponse> analyzeStrings(@RequestBody StringRequest request) {
         LOGGER.info("Incoming {}", request.toString());
 
-        return stringService.process(request);
+        return ResponseEntity.ok(stringService.process(request));
     }
 }
