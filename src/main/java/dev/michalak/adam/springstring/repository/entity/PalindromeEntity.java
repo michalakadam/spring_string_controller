@@ -11,19 +11,19 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Getter
-public class StringData {
+public class PalindromeEntity {
 
     @Id
     private Long id;
-    private String concatenatedResult;
+    private String palindrome;
 
-    public StringData(String concatenatedResult) {
-        this.id = (long) concatenatedResult.hashCode();
-        this.concatenatedResult = concatenatedResult;
+    public PalindromeEntity(String palindrome) {
+        this.id = (long) palindrome.hashCode();
+        this.palindrome = palindrome;
     }
 
     @Override
     public String toString() {
-        return id + ": " + concatenatedResult;
+        return id + ": " + palindrome;
     }
 }

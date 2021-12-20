@@ -1,7 +1,9 @@
 package dev.michalak.adam.springstring.controller;
 
+import dev.michalak.adam.springstring.dto.PalindromesRequest;
 import dev.michalak.adam.springstring.dto.StringAnalysisRequest;
 import dev.michalak.adam.springstring.dto.StringAnalysisResponse;
+import dev.michalak.adam.springstring.repository.entity.PalindromeEntity;
 import dev.michalak.adam.springstring.service.StringService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,5 +28,12 @@ public class StringController {
         LOGGER.info("Incoming {}", request.toString());
 
         return ResponseEntity.ok(stringService.process(request));
+    }
+
+    @PostMapping("palindromes")
+    public ResponseEntity<Iterable<PalindromeEntity>> savePalindromes(@RequestBody PalindromesRequest request) {
+        LOGGER.info("Incoming {}", request.toString());
+
+        return ResponseEntity.ok(stringService.savePalindromes(request));
     }
 }

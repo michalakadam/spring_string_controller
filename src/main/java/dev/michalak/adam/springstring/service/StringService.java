@@ -1,10 +1,13 @@
 package dev.michalak.adam.springstring.service;
 
+import dev.michalak.adam.springstring.dto.PalindromesRequest;
 import dev.michalak.adam.springstring.dto.StringAnalysisRequest;
 import dev.michalak.adam.springstring.dto.StringAnalysisResponse;
 import dev.michalak.adam.springstring.repository.StringRepository;
-import dev.michalak.adam.springstring.repository.entity.StringData;
+import dev.michalak.adam.springstring.repository.entity.PalindromeEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 @Service
 public class StringService {
@@ -20,8 +23,15 @@ public class StringService {
     public StringAnalysisResponse process(StringAnalysisRequest request) {
         StringAnalysisResponse response = stringAnalyzer.analyze(request);
 
-        stringRepository.save(new StringData(response.getConcatenatedResult()));
+        stringRepository.save(new PalindromeEntity(response.getConcatenatedResult()));
 
         return response;
+    }
+
+    public Iterable<PalindromeEntity> savePalindromes(PalindromesRequest request) {
+        return stringRepository.saveAll(request.getPalindromes()
+                .stream()
+                .map(PalindromeEntity::new)
+                .collect(Collectors.toList()));
     }
 }

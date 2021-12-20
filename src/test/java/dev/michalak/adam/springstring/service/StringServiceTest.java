@@ -3,7 +3,7 @@ package dev.michalak.adam.springstring.service;
 import dev.michalak.adam.springstring.dto.StringAnalysisRequest;
 import dev.michalak.adam.springstring.dto.StringAnalysisResponse;
 import dev.michalak.adam.springstring.repository.StringRepository;
-import dev.michalak.adam.springstring.repository.entity.StringData;
+import dev.michalak.adam.springstring.repository.entity.PalindromeEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -48,6 +48,6 @@ class StringServiceTest {
         assertEquals(expected, actual);
         verify(stringAnalyzer, times(1)).analyze(request);
         verify(stringRepository, times(1))
-                .save(new StringData(expected.getConcatenatedResult()));
+                .save(new PalindromeEntity(expected.getConcatenatedResult()));
     }
 }
