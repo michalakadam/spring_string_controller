@@ -1,10 +1,10 @@
 # spring_string_controller
 
-##### REST endpoint that accepts lists of strings and returns analysis results.
+##### REST endpoint that analysis/persists String data.
 
 *Template for this project was automatically generated using [Java Project Initializr script](https://github.com/michalakadam/Mantra)*
 
-Example request:
+Example request to /analyze endpoint:
 ```
 {
     "data": [
@@ -22,7 +22,7 @@ Example request:
 }
 ```
 
-Example response:
+Example response from analyze endpoint:
 ```
 {
     "palindromePresent": true,
