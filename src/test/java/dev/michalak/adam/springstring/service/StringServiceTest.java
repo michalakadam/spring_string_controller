@@ -1,7 +1,7 @@
 package dev.michalak.adam.springstring.service;
 
-import dev.michalak.adam.springstring.dto.StringRequest;
-import dev.michalak.adam.springstring.dto.StringResponse;
+import dev.michalak.adam.springstring.dto.StringAnalysisRequest;
+import dev.michalak.adam.springstring.dto.StringAnalysisResponse;
 import dev.michalak.adam.springstring.repository.StringRepository;
 import dev.michalak.adam.springstring.repository.entity.StringData;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,13 +30,13 @@ class StringServiceTest {
 
     @Test
     void process_shouldCallDependenciesAndReturnValidResult() {
-        var request = StringRequest.builder()
+        var request = StringAnalysisRequest.builder()
                 .listsOfStrings(List.of(
                         List.of("abb", "aa", "zz"),
                         List.of("zz", "aa", "bba")
                 ))
                 .build();
-        var expected = StringResponse.builder()
+        var expected = StringAnalysisResponse.builder()
                 .palindromePresent(true)
                 .averageLength(2.34)
                 .concatenatedResult("abbaazzzzaabba")

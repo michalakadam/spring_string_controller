@@ -1,7 +1,7 @@
 package dev.michalak.adam.springstring.controller;
 
-import dev.michalak.adam.springstring.dto.StringRequest;
-import dev.michalak.adam.springstring.dto.StringResponse;
+import dev.michalak.adam.springstring.dto.StringAnalysisRequest;
+import dev.michalak.adam.springstring.dto.StringAnalysisResponse;
 import dev.michalak.adam.springstring.service.StringService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ public class StringController {
     }
 
     @PostMapping("analyze")
-    public ResponseEntity<StringResponse> analyzeStrings(@RequestBody StringRequest request) {
+    public ResponseEntity<StringAnalysisResponse> analyzeStrings(@RequestBody StringAnalysisRequest request) {
         LOGGER.info("Incoming {}", request.toString());
 
         return ResponseEntity.ok(stringService.process(request));

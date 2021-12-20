@@ -11,17 +11,17 @@ import java.util.Objects;
 
 /**
   * Jackson + verbose Builder pattern for practice purposes.
-  * Lombok is used in {@link StringResponse} in case you are wondering.
+  * Lombok is used in {@link StringAnalysisResponse} in case you are wondering.
   */
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonDeserialize(builder = StringRequest.Builder.class)
-public class StringRequest {
+@JsonDeserialize(builder = StringAnalysisRequest.Builder.class)
+public class StringAnalysisRequest {
 
     @JsonProperty("data")
     @Size(min = 0, message = "Lists of Strings not provided")
     private final List<@NotNull List<String>> listsOfStrings;
 
-    private StringRequest(List<List<String>> listsOfStrings) {
+    private StringAnalysisRequest(List<List<String>> listsOfStrings) {
         this.listsOfStrings = listsOfStrings;
     }
 
@@ -29,7 +29,7 @@ public class StringRequest {
         return new Builder();
     }
 
-    public static Builder toBuilder(StringRequest copy) {
+    public static Builder toBuilder(StringAnalysisRequest copy) {
         Builder builder = new Builder();
         builder.listsOfStrings = copy.getListsOfStrings();
         return builder;
@@ -43,7 +43,7 @@ public class StringRequest {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StringRequest that = (StringRequest) o;
+        StringAnalysisRequest that = (StringAnalysisRequest) o;
         return Objects.equals(listsOfStrings, that.listsOfStrings);
     }
 
@@ -69,8 +69,8 @@ public class StringRequest {
             return this;
         }
 
-        public StringRequest build() {
-            return new StringRequest(this.listsOfStrings);
+        public StringAnalysisRequest build() {
+            return new StringAnalysisRequest(this.listsOfStrings);
         }
     }
 }

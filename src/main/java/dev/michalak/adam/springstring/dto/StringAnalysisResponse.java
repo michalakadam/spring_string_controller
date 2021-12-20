@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @EqualsAndHashCode
-public class StringResponse {
+public class StringAnalysisResponse {
 
     @JsonProperty("concatenated")
     @Builder.Default

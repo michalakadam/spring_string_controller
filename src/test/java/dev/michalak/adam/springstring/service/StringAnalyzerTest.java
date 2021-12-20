@@ -1,7 +1,7 @@
 package dev.michalak.adam.springstring.service;
 
-import dev.michalak.adam.springstring.dto.StringRequest;
-import dev.michalak.adam.springstring.dto.StringResponse;
+import dev.michalak.adam.springstring.dto.StringAnalysisRequest;
+import dev.michalak.adam.springstring.dto.StringAnalysisResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +20,8 @@ class StringAnalyzerTest {
     @Test
     void analyze_emptyListOfLists_returnsDefaultResponse() {
         // listsOfStrings is never null - 500 error is thrown at the controller level.
-        var request = StringRequest.builder().listsOfStrings(List.of()).build();
-        var expected = StringResponse.builder().build();
+        var request = StringAnalysisRequest.builder().listsOfStrings(List.of()).build();
+        var expected = StringAnalysisResponse.builder().build();
 
         var actual = stringAnalyzer.analyze(request);
 
@@ -30,13 +30,13 @@ class StringAnalyzerTest {
 
     @Test
     void analyze_requestWithValidData_returnsProperlyPopulatedResponse() {
-        var request = StringRequest.builder()
+        var request = StringAnalysisRequest.builder()
                 .listsOfStrings(List.of(
                         List.of("abb", "aa", "zz"),
                         List.of("zz", "aa", "bba")
                 ))
                 .build();
-        var expected = StringResponse.builder()
+        var expected = StringAnalysisResponse.builder()
                 .palindromePresent(true)
                 .averageLength(2.34)
                 .concatenatedResult("abbaazzzzaabba")

@@ -1,9 +1,8 @@
 package dev.michalak.adam.springstring.service;
 
-import dev.michalak.adam.springstring.dto.StringRequest;
-import dev.michalak.adam.springstring.dto.StringResponse;
+import dev.michalak.adam.springstring.dto.StringAnalysisRequest;
+import dev.michalak.adam.springstring.dto.StringAnalysisResponse;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -13,10 +12,10 @@ import java.util.stream.Collectors;
 @Component
 class StringAnalyzer {
 
-    StringResponse analyze(StringRequest request) {
+    StringAnalysisResponse analyze(StringAnalysisRequest request) {
         var listsOfStrings = request.getListsOfStrings();
 
-        return StringResponse.builder()
+        return StringAnalysisResponse.builder()
                 .concatenatedResult(concatenate(listsOfStrings))
                 .palindromePresent(isPalindromePresent(listsOfStrings))
                 .averageLength(calculateAverageLength(listsOfStrings))
