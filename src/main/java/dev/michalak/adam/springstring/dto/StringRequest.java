@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,9 +15,7 @@ import java.util.Objects;
   */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonDeserialize(builder = StringRequest.Builder.class)
-public class StringRequest implements Serializable {
-    // Required to verify that loaded class and the serialized object are compatible.
-    private static final long serialVersionUID = 1234567L;
+public class StringRequest {
 
     @JsonProperty("data")
     @Size(min = 0, message = "Lists of Strings not provided")
