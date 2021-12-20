@@ -31,6 +31,7 @@ public class StringService {
     public Iterable<PalindromeEntity> savePalindromes(PalindromesRequest request) {
         return stringRepository.saveAll(request.getPalindromes()
                 .stream()
+                .filter(stringAnalyzer::isPalindrome)
                 .map(PalindromeEntity::new)
                 .collect(Collectors.toList()));
     }

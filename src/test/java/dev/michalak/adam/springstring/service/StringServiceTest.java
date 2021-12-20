@@ -1,5 +1,6 @@
 package dev.michalak.adam.springstring.service;
 
+import dev.michalak.adam.springstring.dto.PalindromesRequest;
 import dev.michalak.adam.springstring.dto.StringAnalysisRequest;
 import dev.michalak.adam.springstring.dto.StringAnalysisResponse;
 import dev.michalak.adam.springstring.repository.StringRepository;
@@ -49,5 +50,20 @@ class StringServiceTest {
         verify(stringAnalyzer, times(1)).analyze(request);
         verify(stringRepository, times(1))
                 .save(new PalindromeEntity(expected.getConcatenatedResult()));
+    }
+
+    @Test
+    void savePalindromes_shouldCallRepositoryWithPalindromes() {
+        PalindromesRequest palindromesRequest = PalindromesRequest.builder()
+                .palindromes(List.of("beeba", "babbab"))
+                .build();
+        List<PalindromeEntity> palindromeEntities = List.of(new PalindromeEntity("babbab"));
+
+        when(stringAnalyzer.isPalindrome("beeba")).thenReturn(false);
+        when(stringAnalyzer.isPalindrome("babbab")).thenReturn(true);
+        stringService.savePalindromes(palindromesRequest);
+
+        verify(stringRepository, times(1)).saveAll(palindromeEntities);
+
     }
 }

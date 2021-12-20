@@ -28,7 +28,7 @@ class StringAnalyzer {
                 .anyMatch(this::isPalindrome);
     }
 
-    private boolean isPalindrome(String text){
+    boolean isPalindrome(String text){
         String reversed = new StringBuilder(text).reverse().toString();
 
         return text.equals(reversed);
