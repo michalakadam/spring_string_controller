@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 public class StringController {
 
@@ -31,7 +33,7 @@ public class StringController {
     }
 
     @PostMapping("palindromes")
-    public ResponseEntity<Iterable<PalindromeEntity>> savePalindromes(@RequestBody PalindromesRequest request) {
+    public ResponseEntity<Iterable<PalindromeEntity>> savePalindromes(@Valid @RequestBody PalindromesRequest request) {
         LOGGER.info("Incoming {}", request.toString());
 
         return ResponseEntity.ok(stringService.savePalindromes(request));

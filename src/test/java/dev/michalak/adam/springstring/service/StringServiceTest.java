@@ -54,7 +54,7 @@ class StringServiceTest {
 
     @Test
     void savePalindromes_shouldCallRepositoryWithPalindromes() {
-        PalindromesRequest palindromesRequest = PalindromesRequest.builder()
+        PalindromesRequest palindromesRequest = PalindromesRequest.newBuilder()
                 .palindromes(List.of("beeba", "babbab"))
                 .build();
         List<PalindromeEntity> palindromeEntities = List.of(new PalindromeEntity("babbab"));
